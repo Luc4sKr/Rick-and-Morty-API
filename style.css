@@ -1,12 +1,11 @@
 *{
-
     margin: 0;
-   
-    
 }
 
-.informacoes{
+body {
+    overflow-x: hidden;
     
+.informacoes{
     padding-top: 1em;
     height: 50vh;
 }
@@ -17,8 +16,15 @@
     text-align: justify;
 }
 
-footer{
 
+character {
+    z-index: 2;
+}
+
+.character:hover {
+    cursor: pointer;
+
+footer{
     padding-top: .3em;
     width: 100vw;
     height: 10vh;
