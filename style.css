@@ -1,18 +1,21 @@
 *{
-
     margin: 0;
-   
-    
 }
 
 body {
     overflow-x: hidden;
+    
+.informacoes{
+    padding-top: 1em;
+    height: 50vh;
 }
 
 #text{
 
+    
     text-align: justify;
 }
+
 
 character {
     z-index: 2;
@@ -20,4 +23,10 @@ character {
 
 .card:hover {
     cursor: pointer;
+
+footer{
+    padding-top: .3em;
+    width: 100vw;
+    height: 10vh;
+    background-color: rgb(17, 10, 121);
 }
