@@ -21,12 +21,17 @@ $('#btn-buscar').click((e)=>{
     var buscaText = $('.busca').val();
     validaBusca(buscaText);
     
-    
-    
-   
-    
 
 });
+
+
+const showMsgAlert = (msg) => {
+    $('#msg-alert').html(msg);
+    $('#alert').fadeIn('slow');
+
+
+}
+
 
 
 const validaBusca = (termo) =>{
@@ -53,26 +58,29 @@ const buscaPnome = (url, target) => {
         dataType: 'json',
         success: (data) => {
         
-            var termoBusca = 'Rick Sanchez';
+            //var termoBusca = 'Rick Sanchez';
             for(var i=0; i < data.results.length; i++){ // COLOCAR O INPUT DA PÁGINA AQUI $(#INPUT).VAL();
         
       
-               // console.log(`Nome: ${data.results[i].name}`); // COMPARAR ENTRADA DO INPUT COM O OBJETO
+               
             
             
                if(data.results[i].name == nomeCharacter){
         
+                
                 console.log('ENCONTRADO');
                 return true;
+
+                //ADD UM HREF AQUI PARA A PÁGINA CONTEÚDO
+                // E ADD O NOME DO OBJETO NO LOCALSTORAGE, ELE VAI SER PASSADO PARA COMPOR O LINK NA OUTRA PÁGINA
                 
                 }
             
             
             }
-        
+
             console.log('NÃO ENCONTRADO');
             return false;
-        
         }
     });
 }
