@@ -25,6 +25,10 @@ const getCharacter = () => {
                     maxWidth: "540px"
                 })
 
+                $(card).click((e) => {
+                    console.log("click")
+                });
+
                 $(row).addClass("character row g-0");
                 $(columnImg).addClass("col-md-4");
                 $(columnImg).attr("id", `character-${i}`);
