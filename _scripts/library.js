@@ -1,6 +1,6 @@
 const getPagina = (url, target) => {
     $.ajax({
-        url: `_views/${url}`,
+        url: `${url}`,
         dataType: 'html',
         success: (pagina) => {
             $(target).html(pagina);
