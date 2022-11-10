@@ -1,11 +1,11 @@
 const URL_API = "https://rickandmortyapi.com/api/character";
 
 $(document).ready((e) => {
-    getCharacter();    
+    listCharacter();    
 });
 
 
-const getCharacter = () => {
+const listCharacter = () => {
     $.ajax({
         url: URL_API,
         dataType: "json",
@@ -25,21 +25,21 @@ const getCharacter = () => {
                     maxWidth: "540px"
                 })
 
-                $(card).click((e) => {
-                    console.log("click")
-                });
-
-                $(row).addClass("character row g-0");
-                $(columnImg).addClass("col-md-4");
-                $(columnImg).attr("id", `character-${i}`);
-                getImg(character.url, `#character-${i}`);
+                $(row).addClass("row g-0");
+                $(columnImg).addClass("character col-md-4");
+                $(columnImg).attr("id", `img-character-${i}`);
+                getImg(character.url, `#img-character-${i}`);
                 $(row).append(columnImg);
+
+                $(columnImg).click((e) => {
+                    getContent(character.id);
+                });
 
                 let columnBody = document.createElement("div");
                 $(columnBody).addClass("col-md-8");
 
                 let cardBody = document.createElement("div");
-                $(cardBody).addClass("card-body p-4 pb-2 pt-3");
+                $(cardBody).addClass("card-body p-2");
                 $(columnBody).append(cardBody);
 
                 let title = document.createElement("h5");
@@ -77,9 +77,50 @@ const getImg = (url, target) => {
 
             $(dataHtml).addClass("img-fluid rounded-start");
             $(dataHtml).attr("src", data.image);
+            $(dataHtml).attr("id", data.id);
 
             $(target).append(dataHtml);
         }
     });
 }
 
+const getContent = (idCharacter) => {
+    $.ajax({
+        url: "../conteudo.html",
+        dataType: 'html',
+        success: (pagina) => {
+            $(".character-card").html(pagina);
+            
+            $.ajax({
+                url: `${URL_API}/${idCharacter}`,
+                dataType: "json",
+                success: (data) => {
+                    
+                    // Head
+                    $("#character-name").html(`${data.name}`);
+                    $("#character-image").attr("src", data.image);
+                    $("#character-image").css({
+                        "width": "200px"
+                    });
+
+                    // Infos
+                    $("#character-status").html(`Status: ${data.status}`);
+                    $("#character-species").html(`Species: ${data.species}`);
+                    $("#character-gender").html(`Gender: ${data.gender}`);
+                    $("#character-origin").html(`Origin: ${data.origin.name}`);
+                    
+                    // Location
+                    $.ajax({
+                        url: data.location.url,
+                        dataType: "json",
+                        success: (data) => {
+                            $("#character-location").html(`Location: ${data.name}`);
+                            $("#location-type").html(`Location type: ${data.type}`);
+                            $("#dimension").html(`Dimension: ${data.dimension}`);
+                        }
+                    });
+                }
+            })
+        }
+    });
+}
