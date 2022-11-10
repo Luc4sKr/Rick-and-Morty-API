@@ -1,7 +1,7 @@
 $(document).ready((e) => {
     $("#btn-voltar").click((e) => {
         $("#info-card").remove();
-
+        
         let characterCard = $(".character-card");
         let row = document.createElement("div");
         let title = document.createElement("h1");
