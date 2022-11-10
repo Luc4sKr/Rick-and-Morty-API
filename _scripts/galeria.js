@@ -1,9 +1,16 @@
-const URL_API = "https://rickandmortyapi.com/api/character";
+const URL_API = "https://rickandmortyapi.com/api/character/";
 
 $(document).ready((e) => {
-    getCharacter();    
+    getCharacter();  
+    
+    $("#character-0").click(() => console.log("teste"));
+
+    // cliqueCard();  functio que espera o
 });
 
+const navegaDetalhesId = (id) =>{
+
+}
 
 const getCharacter = () => {
     $.ajax({
@@ -25,14 +32,13 @@ const getCharacter = () => {
                     maxWidth: "540px"
                 })
 
-                $(card).click((e) => {
-                    console.log("click")
-                });
+                
 
                 $(row).addClass("character row g-0");
                 $(columnImg).addClass("col-md-4");
                 $(columnImg).attr("id", `character-${i}`);
                 getImg(character.url, `#character-${i}`);
+
                 $(row).append(columnImg);
 
                 let columnBody = document.createElement("div");
@@ -63,10 +69,43 @@ const getCharacter = () => {
                 $(row).append(columnBody);
                 $(card).append(row);
                 $(listCharacter).append(card);
+
+                // ***********************pegar id no clique
+                $(card).click((e) => {
+
+                    console.log(character.id);
+                    cliqueCard(character.id);
+                })
+                
+                // ***********************fim
+                   
+                
             });
         }
     });
 }
+
+// **********************************função para pegar caminho e concatenar com id
+const cliqueCard = (cartId) =>{
+    console.log("teste");
+    var caminho = URL_API+cartId
+    
+    console.log(caminho);
+    getDetails(caminho);
+    
+    };
+// ******************************para pegar as informações, atualmente somente no console
+const getDetails = (caminho) => {
+    $.ajax({
+        url: caminho,
+        dataType: "json",
+        success: (data) => {
+            console.log(data.name)
+        }
+    });
+}
+// *********************************fim
+
 
 const getImg = (url, target) => {
     return $.ajax({
