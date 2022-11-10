@@ -67,9 +67,13 @@ const buscaPnome = (url, target) => {
             
                if(data.results[i].name == nomeCharacter){
         
-                
-                console.log('ENCONTRADO');
+                let id = data.results[i].id;
+                saveId(id); 
+                console.log(`ENCONTRADO, o ID É: ${id}`);
+                window.location.replace("conteudo.html");
                 return true;
+
+                
 
                 //ADD UM HREF AQUI PARA A PÁGINA CONTEÚDO
                 // E ADD O NOME DO OBJETO NO LOCALSTORAGE, ELE VAI SER PASSADO PARA COMPOR O LINK NA OUTRA PÁGINA
@@ -86,7 +90,11 @@ const buscaPnome = (url, target) => {
 }
 
 
+const saveId = (id) =>{
 
+window.localStorage.setItem('idPersonagem', id);
+
+}
 
 
 const getPagina = (url, target) => {
