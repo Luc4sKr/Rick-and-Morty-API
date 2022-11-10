@@ -5,7 +5,9 @@ $(document).ready(() => {
     $('#btn-buscar').click((e) => {
         e.preventDefault();
         var buscaText = $('.busca').val();
-        validaBusca(buscaText);
+        if (validaBusca(buscaText)) {
+            buscaPnome(buscaText);
+        }
     });
 });
 
@@ -17,19 +19,17 @@ const showMsgAlert = (msg) => {
 const validaBusca = (termo) => {
     if (termo != '') {
         nomeCharacter = termo;
-        buscaPnome(URL_API, 'main');
-    } else {
-        console.log('O CAMPO ESTÁ EM BRANCO');
+        return true;
     }
 }
 
-const buscaPnome = (url, target) => {
+const buscaPnome = (url) => {
     $.ajax({
         url: url,
         dataType: 'json',
         success: (data) => {
             for (var i = 0; i < data.results.length; i++) { // COLOCAR O INPUT DA PÁGINA AQUI $(#INPUT).VAL();
-                if (data.results[i].name == nomeCharacter) {
+                if (data.results[i].name.toLowerCase() == nomeCharacter.toLowerCase()) {
                     let id = data.results[i].id;
                     saveId(id);
                     console.log(`ENCONTRADO, o ID É: ${id}`);
