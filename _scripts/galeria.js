@@ -4,10 +4,13 @@ $(document).ready((e) => {
     listCharacter();
 
     $("#btn-buscar").click((e) => {
-        URL_A = "https://rickandmortyapi.com/api/character";
+        let url_character = "https://rickandmortyapi.com/api/character";
         e.preventDefault();
         var buscaText = $('.busca').val();
-        validaBusca(buscaText);
+
+        if (validaBusca(buscaText)) {
+            buscaPnome(url_character);
+        }
     });
 });
 
@@ -134,30 +137,26 @@ const getContent = (idCharacter) => {
 const validaBusca = (termo) => {
     if (termo != '') {
         nomeCharacter = termo;
-        buscaPnome(URL_API, 'main');
-    } else {
-        console.log('O CAMPO ESTÁ EM BRANCO');
-        getCharacter();
+        return true;
     }
+    window.alert("Campo vazio!");
+    return false;
 }
 
-const buscaPnome = (url, target) => {
+const buscaPnome = (url) => {
     $.ajax({
         url: url,
         dataType: 'json',
         success: (data) => {
-            for (var i = 0; i < data.results.length; i++) { // COLOCAR O INPUT DA PÁGINA AQUI $(#INPUT).VAL();
-                if (data.results[i].name == nomeCharacter) {
-
+            for (var i = 0; i < data.results.length; i++) { 
+                if (data.results[i].name.toLowerCase().includes(nomeCharacter.toLowerCase())) {
                     let id = data.results[i].id;
-                    URL_A += '/';
-                    URL_A += id;
-                    console.log('filtrando por id' + URL_A);
-                    getCharacterByid(URL_A);
+                    url = `${url}/${id}`;
+                    getCharacterByid(url);
                     return true;
                 }
             }
-            console.log('NÃO ENCONTRADO');
+            window.alert("Não encontrado!");
             return false;
         }
     });
@@ -227,8 +226,6 @@ const getCharacterByid = (url) => {
             $(row).append(columnBody);
             $(card).append(row);
             $(listCharacter).append(card);
-
-            URL_A = "https://rickandmortyapi.com/api/character";
         }
     });
 }
