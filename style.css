@@ -28,6 +28,10 @@ body {
     box-shadow: 2px 2px 4px #808080;
 }
 
+.character:hover {
+    cursor: pointer;
+}
+
 #infos {
     width: 80%;
     margin: 0 auto;
