@@ -1,5 +1,5 @@
 <h1 align="center">Rick and Morty - API</h1>
-<p align="center">Projeto de estudo utulizando a API pública do Rick and Morty<p>
+<p align="center">Projeto de estudo utilizando a API pública do Rick and Morty</p>
 
 <h1 align="center">Tecnologias utilizadas</h1>
 <div align="center">
